@@ -96,7 +96,18 @@ class LinkedList {
     }
     return newList;
   }
+  //تابع بالا به روش بازگشتی
+  filterRecursive(func, current = this.head, newList = new LinkedList()) {
+    if (!current) {
+      return newList;
+    }
 
+    if (func(current.value)) {
+      newList.insertLast(current.value);
+    }
+
+    return this.filterRecursive(func, current.next, newList);
+  }
 
 
 
@@ -131,6 +142,8 @@ console.log(list.at(4));
 console.log(list.join(","));
 console.log(list.map((el) => el.toUpperCase()));
 console.log(list.filter((el) => el < "n"));
+const filteredList = list.filterRecursive((el) => el < "n");
+filteredList.printList();
 // مثال استفاده از تابع find برای یافتن اولین عضوی که مقدارش 'c' است
 const foundNode = list.find(value => value === 'c');
 console.log("First node with value 'c':", foundNode); // خروجی باید 'c' باشد
