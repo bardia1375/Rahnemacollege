@@ -1,26 +1,35 @@
+import React from "react";
+import { State, Action } from "../reducer";
+import { StyledInput } from "../../Components/Styled/Input";
 
-import React from 'react';
-import { StyledInput } from "../StyledComponent/FingersStyle";
-import {  State, Action } from "../reducer";
-
-type InputHandlerProps = {
+type TextInputProps = {
   state: State;
   dispatch: React.Dispatch<Action>;
   setChangeHandlerTimer: React.Dispatch<React.SetStateAction<boolean>>;
+  search: string;
+  setSearch: (value: string) => void;
 };
 
-const InputHandler: React.FC<InputHandlerProps> = ({ state, dispatch, setChangeHandlerTimer }) => {
+const TextInput: React.FC<TextInputProps> = ({
+  state,
+  dispatch,
+  setChangeHandlerTimer,
+  search,
+  setSearch,
+}) => {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     setChangeHandlerTimer(true);
 
     if (event.code === "Space") {
       event.preventDefault(); // Prevent adding space to input
-      if (state.search.trim() === "") {
-        dispatch({ type: "SET_SEARCH", payload: "" });
+      const target = event.target as HTMLInputElement;
+      if (search.trim() === "") {
+        setSearch(target.value);
       } else {
-        const isCorrect = state.strings[state.id].value.trim() === state.search.trim();
+        const isCorrect =
+          state.strings[state.id].value.trim() === search.trim();
         dispatch({ type: "NEXT_WORD", payload: { isCorrect } });
-
+        setSearch("");
         if (state.id + 1 === 10) {
           dispatch({ type: "REARRANGE_LINES" });
         }
@@ -29,17 +38,17 @@ const InputHandler: React.FC<InputHandlerProps> = ({ state, dispatch, setChangeH
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: "SET_SEARCH", payload: e.target.value });
+    setSearch(e.target.value);
   };
 
   return (
     <StyledInput
       onKeyDown={handleKeyDown}
-      value={state.search}
+      value={search}
       onChange={handleChange}
       type="text"
     />
   );
 };
 
-export default InputHandler;
+export default TextInput;

@@ -1,25 +1,21 @@
-import { initialWords } from "./Controler/initialWords";
-import { Word, AcceptStatus, State } from "./Types/Types";
+import { InitialWords } from "./Controler/InitialWords";
+import { Word, AcceptStatus, State } from "../Types/Types";
 
 type Action =
-  | { type: "SET_SEARCH"; payload: string }
   | { type: "NEXT_WORD"; payload: { isCorrect: boolean } }
   | { type: "REARRANGE_LINES" }
   | { type: "RESET" }
-  | { type: "END_TIME" };
 
 const initialState: State = {
-  strings: initialWords,
+  strings: InitialWords,
   correctCount: 0,
   incorrectCount: 0,
   id: 0,
-  search: "",
 };
 
 function reducer(state: State, action: Action): State {
   switch (action.type) {
-    case "SET_SEARCH":
-      return { ...state, search: action.payload };
+
     case "NEXT_WORD":
       const { isCorrect } = action.payload;
       const updatedStrings: Word[] = state.strings.map((word, index) =>
@@ -35,7 +31,6 @@ function reducer(state: State, action: Action): State {
         incorrectCount: isCorrect
           ? state.incorrectCount
           : state.incorrectCount + 1,
-        search: "",
       };
     case "REARRANGE_LINES":
       return {

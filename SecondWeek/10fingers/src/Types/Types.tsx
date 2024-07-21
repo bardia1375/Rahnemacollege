@@ -11,6 +11,5 @@ export type State = {
   id: number;
   correctCount: number;
   incorrectCount: number;
-  search: string;
 
 };

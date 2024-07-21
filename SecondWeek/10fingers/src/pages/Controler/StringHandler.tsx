@@ -1,7 +1,7 @@
 
 import React from "react";
-import { StringSpan } from "../StyledComponent/FingersStyle";
 import { Word } from "../reducer";
+import { StringSpan } from "../../Components/Styled/Span";
 
 type WordsLinesProps = {
   strings: Word[];

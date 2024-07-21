@@ -1,16 +1,16 @@
 import { useReducer, useState } from "react";
-import { Container, Tools } from "./StyledComponent/FingersStyle";
+import { Container, Tools } from "./StyledComponent/FingersStyles";
 import Timer from "../Components/Timer";
 import Result from "./Result";
 import { reducer, initialState, State } from "./reducer";
 import StringHandler from "./Controler/StringHandler";
-import InputHandler from "./Controler/InputHandler";
-import { initialWords } from "./Controler/initialWords";
-import Refresh from "../Components/Refresh";
+import TextInput from "./Controler/TextInput";
+import { InitialWords } from "./Controler/InitialWords";
+import Button from "../Components/Button";
 
 const updatedInitialState: State = {
   ...initialState,
-  strings: initialWords,
+  strings: InitialWords,
 };
 
 function FingersSpeed() {
@@ -18,10 +18,13 @@ function FingersSpeed() {
   const [changeHandlerTimer, setChangeHandlerTimer] = useState<boolean>(false);
   const [timerKey, setTimerKey] = useState<number>(0); // Key for resetting Timer
   const [endTime, setEndTime] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>("");
   const handleRefresh = () => {
     dispatch({ type: "RESET" });
     setChangeHandlerTimer(false);
     setTimerKey((prev) => prev + 1); // Increment key to reset Timer
+    setSearch("");
+    setEndTime(false);
   };
   const handleEndTime = () => {
     setEndTime(!endTime);
@@ -29,18 +32,20 @@ function FingersSpeed() {
 
   return (
     <Container>
-      {!endTime&& (
+      {!endTime && (
         <StringHandler
           strings={state.strings}
           id={state.id}
-          search={state.search}
+          search={search}
           startIndex={0}
           numberOfWordsInEachLine={10}
         />
       )}
 
       <Tools>
-        <InputHandler
+        <TextInput
+          search={search}
+          setSearch={setSearch}
           state={state}
           dispatch={dispatch}
           setChangeHandlerTimer={setChangeHandlerTimer}
@@ -50,7 +55,7 @@ function FingersSpeed() {
           onEnd={handleEndTime}
           key={timerKey}
         />
-        <Refresh onRefresh={handleRefresh} />
+        <Button onClick={handleRefresh}>Refresh</Button>
       </Tools>
       {endTime && (
         <Result
