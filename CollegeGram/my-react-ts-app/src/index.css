@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  direction: rtl;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+}
+p {
+  font-size: 0.8rem;
+}
+h3{
+  font-size: 1.2rem;
+}
+h2{
+  font-size: 1.5rem;
+
+}
+h1{
+  font-size: 2rem;
+}
+@font-face {
+  font-family: "Yekan Bakh";
+  font-weight: 100;
+  src: url("/src/assets/fonts/Yekan-Bakh-EN-01-Hairline.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Yekan Bakh";
+  font-weight: 300;
+  src: url("/src/assets/fonts/Yekan-Bakh-EN-03-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Yekan Bakh";
+  font-weight: 500;
+  src: url("/src/assets/fonts/Yekan-Bakh-EN-05-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Yekan Bakh";
+  font-weight: 500;
+  src: url("/src/assets/fonts/TTF/YekanBakhFaNum-Regular.ttf")
+    format("truetype");
+}
+body {
+  font-family: "Yekan Bakh", "Vazir";
+}
