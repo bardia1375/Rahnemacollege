@@ -1,17 +1,17 @@
-import React from 'react';
-import Box from '../Componenets/Box/Box';
-import TextField from '../Componenets/Fields/TextField/TextField';
-import Button from '../Componenets/Button/Button';
-import Typography from '../Componenets/Typography/Typography';
-import useMediaQuery from '../hook/useMediaQuery';
-import { FaUser, FaLock } from 'react-icons/fa';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-
+import React from "react";
+import Box from "../Componenets/Box/Box";
+import TextField from "../Componenets/Fields/TextField/TextField";
+import Button from "../Componenets/Button/Button";
+import Typography from "../Componenets/Typography/Typography";
+import useMediaQuery from "../hook/useMediaQuery";
+import { FaUser, FaLock } from "react-icons/fa";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import bardia from "../assets/RahnamaLogo.svg";
 const schema = z.object({
-  usernameOrEmail: z.string().nonempty('نام کاربری یا ایمیل مورد نیاز است'),
-  password: z.string().nonempty('رمز عبور مورد نیاز است'),
+  usernameOrEmail: z.string().nonempty("نام کاربری یا ایمیل مورد نیاز است"),
+  password: z.string().nonempty("رمز عبور مورد نیاز است"),
 });
 
 type FormValues = {
@@ -37,14 +37,16 @@ const Login: React.FC = () => {
     <Box
       width="w-2/4"
       padding="py-8 px-12"
-      className={`flex items-center justify-center ${
-        device === 'phone'
-          ? 'w-full h-screen items-start justify-between rounded-none py-32'
-          : 'max-w-[450px]'
+      className={`flex items-center justify-center  ${
+        device === "phone"
+          ? "w-full h-screen items-start justify-between rounded-none py-32"
+          : "max-w-[450px]"
       }`}
     >
-      <div className="text-center">
-logo      </div>
+      <div className="flex w-full items-center justify-center">
+        <img src={bardia} className="" />
+      </div>
+
       <div className="flex items-center justify-center py-8 gap-4">
         <Typography variant="h3">ثبت نام</Typography>
         <div>|</div>
@@ -58,7 +60,7 @@ logo      </div>
         <form onSubmit={handleSubmit(onSubmit)} className="mt-6">
           <div>
             <TextField
-              {...register('usernameOrEmail')}
+              {...register("usernameOrEmail")}
               prefixIcon={<FaUser className="text-gray-400" />}
               placeholder="نام کاربری یا ایمیل"
               type="text"
@@ -67,14 +69,17 @@ logo      </div>
           </div>
           <div className="mt-4">
             <TextField
-              {...register('password')}
+              {...register("password")}
               prefixIcon={<FaLock className="text-gray-400" />}
               placeholder="رمز عبور"
               type="password"
               error={errors.password}
             />
           </div>
-          <Typography variant="paragraph" className="text-right mt-4 font-light">
+          <Typography
+            variant="paragraph"
+            className="text-right mt-4 font-light"
+          >
             من را به خاطر بسپار
           </Typography>
           <div className="text-left mt-4">

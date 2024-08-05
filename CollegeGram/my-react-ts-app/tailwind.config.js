@@ -5,6 +5,9 @@ module.exports = {
   // Extend the default theme
   theme: {
     extend: {
+      backgroundImage: {
+        "login-background": "url('/assets/RahnamaLogo.svg')",
+      },
       // Extend colors
       colors: {
         primary: "#CDCDCD",
