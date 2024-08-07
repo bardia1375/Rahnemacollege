@@ -13,12 +13,12 @@ const App: React.FC = () => {
   return (
     <AppProvider>
       <Router>
-        <div className="bg-login-background bg-cover bg-center h-screen flex items-center justify-center">
-          <Routes>
-            <Route path="/about" element={<Login />} />
-            <Route path="/" element={<Dashboard />} />
-          </Routes>
-        </div>
+        {/* <div className="bg-login-background bg-cover bg-center h-screen flex items-center justify-center"> */}
+        <Routes>
+          <Route path="/about" element={<Login />} />
+          <Route path="/" element={<Dashboard />} />
+        </Routes>
+        {/* </div> */}
       </Router>
     </AppProvider>
   );
