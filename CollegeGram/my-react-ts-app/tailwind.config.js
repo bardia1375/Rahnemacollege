@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        "login-background": "url('./assets/Rahnama.svg')",
+        "login-background": "url('./assets/RahnemaBackGround.jpg')",
       },
       // Extend colors
       colors: {

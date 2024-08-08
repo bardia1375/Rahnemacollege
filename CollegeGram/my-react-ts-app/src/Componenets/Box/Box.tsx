@@ -31,7 +31,7 @@ const StyledBox = tw.div<BoxProps>`
   ${(props) => props.shadow || "shadow-lg"}
   ${(props) => props.height || "h-full"}
   ${(props) => props.width || "max-w-[800px]"}
- 
+ [box-shadow:5px_5px_45px_0px_#00000080]
 `;
 
 const Title = tw.div`
@@ -64,7 +64,6 @@ const Box: React.FC<BoxProps> = ({
   onButtonClick,
   ...rest
 }) => {
-
   return (
     <div className="relative w-full ">
       {onButtonClick && (
@@ -73,10 +72,9 @@ const Box: React.FC<BoxProps> = ({
           onClick={onButtonClick}
         >
           Add Form
-          
         </button>
       )}
-      
+
       <StyledBox className={className} {...rest}>
         {title && (
           <>
