@@ -1,6 +1,6 @@
 // useMediaQuery.ts
 import { useEffect, useState } from 'react';
-import { breakpoints } from './breakpoints';
+import { breakpoints } from '../Utils/breakpoints';
 
 type DeviceType = 'phone' | 'tablet' | 'laptop' | 'desktop' | '';
 
