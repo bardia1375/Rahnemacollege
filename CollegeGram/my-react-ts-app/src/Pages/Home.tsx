@@ -21,20 +21,7 @@ const Home: React.FC = () => {
 
   return (
     <div>
-      <h1>Home Page</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>Username</label>
-          <input {...register('username')} />
-          {errors.username && <span>{errors.username.message}</span>}
-        </div>
-        <div>
-          <label>Email</label>
-          <input {...register('email')} />
-          {errors.email && <span>{errors.email.message}</span>}
-        </div>
-        <button type="submit">Submit</button>
-      </form>
+     
     </div>
   );
 };

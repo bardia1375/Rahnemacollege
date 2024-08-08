@@ -6,11 +6,11 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        "login-background": "url('/assets/RahnamaLogo.svg')",
+        "login-background": "url('./assets/Rahnama.svg')",
       },
       // Extend colors
       colors: {
-        primary: "#CDCDCD",
+        primary: "#F5F5F5",
         secondary: "#EA5A69",
         accent: "#657786",
         "new-gray": "rgba(0, 106, 255, 0.05)",
