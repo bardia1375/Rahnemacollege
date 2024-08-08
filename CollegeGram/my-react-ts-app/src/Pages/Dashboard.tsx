@@ -14,11 +14,11 @@ import profilePic from "../assets/profilePic.png";
 function Dashboard() {
   return (
     <>
-      <div className="px-12 bg-neutral-100">
-        <div className="flex flex-row items-center justify-evenly h-screen  gap-16">
+      <div className="px-12 bg-neutral-100 w-full">
+        <div className="flex flex-row items-center justify-evenly h-screen gap-16">
           <div className="max-w-[304px] min-w-[304px]  h-screen flex flex-col items-center gap-10 pt-12 border">
             <div className="my-4 mx-8">
-              <button className=" w-full py-4 px-8 flex justify-center items-center gap-2 bg-[#EA5A69] rounded-full ">
+              <button className="w-full py-4 px-8 flex justify-center items-center gap-2 bg-[#EA5A69] rounded-full">
                 <span className="text-base">ایجاد پست جدید</span>
                 <img src={addSvg} alt="" className="size-[16px]" />
               </button>
@@ -65,7 +65,6 @@ function Dashboard() {
                     <span className="">جستجو</span>
                   </button>
                 </div>
-
                 <div className=" flex flex-col flex-1  justify-end">
                   <button className="flex justify-end items-center gap-2 px-8 py-4">
                     <span className="">بیشتر</span>
