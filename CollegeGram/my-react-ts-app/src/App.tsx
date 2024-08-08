@@ -8,6 +8,7 @@ import ForgetPassword from "./Pages/ForgetPassword";
 import SetNewPassword from "./Pages/SetNewPassword";
 import "./index.css"; // Ensure this is imported
 import ProtectedRout from "./routes/ProtectedRout";
+import Dashboard from "./Pages/Dashboard";
 
 const App: React.FC = () => {
   return (
