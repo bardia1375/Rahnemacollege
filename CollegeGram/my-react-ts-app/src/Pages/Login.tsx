@@ -9,9 +9,9 @@ import Box from "../Componenets/Box/Box";
 import Typography from "../Componenets/Typography/Typography";
 import TextField from "../Componenets/Fields/TextField/TextField";
 import Button from "../Componenets/Button/Button";
-import { ErrorMessage } from "@hookform/error-message";
-import { useRouteMatch } from "react-router-dom";
 import { useAuth } from "../hook/useAuth";
+import { Link, NavLink } from "react-router-dom";
+import { useMutation } from "react-query";
 
 // Custom validation function for email or username
 const emailOrUsername = z
@@ -32,11 +32,13 @@ const emailOrUsername = z
 const schema = z.object({
   usernameOrEmail: emailOrUsername,
   password: z.string().min(1, "رمز عبور ضروری است"),
+  rememberMe: z.boolean().optional(),
 });
 
 type FormValues = {
   usernameOrEmail: string;
   password: string;
+  rememberMe?: boolean;
 };
 
 const Login: React.FC = () => {
@@ -45,19 +47,26 @@ const Login: React.FC = () => {
     control,
     handleSubmit,
     formState: { errors },
-    setError,
     clearErrors,
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
   });
   const { login } = useAuth();
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log(data);
-    login(data)
-  };
 
-  const handleInputChange = (field: keyof FormValues) => {
-    clearErrors(field);
+  // Define the mutation for login
+  const mutation = useMutation((data: FormValues) => login(data), {
+    onSuccess: () => {
+      // Handle success (e.g., redirect to a dashboard)
+      console.log("Login successful");
+    },
+    onError: (error: any) => {
+      // Handle error (e.g., show error message)
+      console.error("Login failed", error);
+    },
+  });
+
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    mutation.mutate(data);
   };
 
   return (
@@ -75,9 +84,14 @@ const Login: React.FC = () => {
       </div>
 
       <div className="flex items-center justify-center py-8 gap-4">
-        <Typography variant="h3">ثبت نام</Typography>
+      <NavLink to="/login" activeClassName="font-bold">
+          <Typography variant="h3">ورود</Typography>
+        </NavLink>
         <div>|</div>
-        <Typography variant="h3">ورود</Typography>
+        <NavLink to="/register" activeClassName="font-bold">
+          <Typography variant="h3">ثبت نام</Typography>
+        </NavLink>
+
       </div>
       <div>
         <Typography variant="paragraph" className="text-right font-light">
@@ -106,34 +120,44 @@ const Login: React.FC = () => {
               error={errors.password?.message}
             />
           </div>
-          <Typography
-            variant="paragraph"
-            className="text-right mt-4 font-light"
-          >
-            من را به خاطر بسپار
-          </Typography>
+          <div className="mt-4 flex items-center gap-2">
+            <input
+              type="checkbox"
+              {...control.register("rememberMe")}
+              id="rememberMe"
+              className="mr-2 bg-white"
+            />
+            <label htmlFor="rememberMe" className="text-right font-light">
+              من را به خاطر بسپار
+            </label>
+          </div>
+
           <div className="text-left mt-4">
-            <Button primary type="submit">
-              ورود
+            <Button primary type="submit" disabled={mutation.isLoading}>
+              {mutation.isLoading ? "در حال ورود..." : "ورود"}
             </Button>
           </div>
         </form>
       </div>
       <div className="text-right mt-6">
-        <Typography
-          color="text-secondary"
-          variant="paragraph"
-          className="text-right mt-4 font-light"
-        >
-          فراموشی رمز عبور
-        </Typography>
-        <Typography
-          color="text-secondary"
-          variant="paragraph"
-          className="text-right font-light"
-        >
-          ثبت نام در کالج‌گرام
-        </Typography>
+        <Link to={"/ForgetPassword"}>
+          <Typography
+            color="text-secondary"
+            variant="paragraph"
+            className="text-right mt-4 font-light"
+          >
+            فراموشی رمز عبور
+          </Typography>
+        </Link>
+        <Link to={"/Register"}>
+          <Typography
+            color="text-secondary"
+            variant="paragraph"
+            className="text-right font-light"
+          >
+            ثبت نام در کالج‌گرام
+          </Typography>
+        </Link>
       </div>
     </Box>
   );
